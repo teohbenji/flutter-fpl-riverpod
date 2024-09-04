@@ -117,11 +117,12 @@ class PlayersTable extends StatefulWidget {
 }
 
 class _PlayersTableState extends State<PlayersTable> {
-  final PlayersDataSource dataSource = PlayersDataSource()..setData(playersDataList, 0, true);
+  // Initially sorts data by total points in descending order  
+  final PlayersDataSource dataSource = PlayersDataSource()..setData(playersDataList, 7, false);
 
-  // Initial column filter values
-  int _columnIndex = 0;
-  bool _columnAscending = true;
+  // Initially sets UI of total points to be clicked and in descending order
+  int _columnIndex = 7;
+  bool _columnAscending = false;
 
   void _sort(int columnIndex, bool ascending) {
     setState(() {
@@ -133,8 +134,6 @@ class _PlayersTableState extends State<PlayersTable> {
 
   @override
   Widget build(BuildContext context) {
-    _sort(7, false); // Sort by total points descending initially
-
     return PaginatedDataTable(
       sortColumnIndex: _columnIndex,
       sortAscending: _columnAscending,
