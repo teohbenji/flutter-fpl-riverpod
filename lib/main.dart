@@ -131,7 +131,7 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
     dataSource = PlayersDataSource();
 
     // Set these two variables only once, don't assign value again during sort/biuld
-    playersDataList = ref.read(playersDataProvider);
+    playersDataList = ref.read(playersDataProvider).valueOrNull;
     dataSource.setData(playersDataList, _columnIndex, _columnAscending); 
   }
 
