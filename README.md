@@ -1,3 +1,7 @@
+# Why use Flutter
+- [Better performance vs React Native](https://nateshmbhat.medium.com/flutter-vs-react-native-performance-benchmarks-you-cant-miss-%EF%B8%8F-2e31905df9b4)
+
+
 # Flutter project best practices
 
 Some of the best practices regarding Flutter development that were gleaned from the project
