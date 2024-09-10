@@ -45,34 +45,49 @@ class PlayersDataSource extends DataTableSource {
       bool sortAscending) {
         sortedData = rawData..sort((Player a, Player b){
           switch (sortColumn) {
-            // Sort by first name, if same, then sort according to last name
+            // Sort by position
             case 0:
+              return a.position.compareTo(b.position) * (sortAscending ? 1 : -1);
+            // Sort by first name, if same, then sort according to last name
+            case 1:
               int comparator = a.firstName.compareTo(b.firstName) * (sortAscending ? 1 : -1);
               if(comparator != 0){
                 return comparator;
               } else {
                 return a.lastName.compareTo(b.lastName) * (sortAscending ? 1 : -1); 
               }
-            // Sort by goals
-            case 1:
+            // Sort by team
+            case 2:
+              return a.team.compareTo(b.team) * (sortAscending ? 1 : -1);  
+            // Sort by starts
+            case 3:
+              return a.starts.compareTo(b.starts) * (sortAscending ? 1 : -1);
+            // Sort by minutes
+            case 4:
+              return a.minutes.compareTo(b.minutes) * (sortAscending ? 1 : -1);
+            // Sort by xG per
+            case 5:
               return a.goals.compareTo(b.goals) * (sortAscending ? 1 : -1);
             // Sort by assists
-            case 2:
+            case 6:
               return a.assists.compareTo(b.assists) * (sortAscending ? 1 : -1);
             // Sort by xG per 90
-            case 3:
+            case 7:
               return a.expectedGoalsPer90.compareTo(b.expectedGoalsPer90) * (sortAscending ? 1 : -1);
             // Sort by xA per 90
-            case 4:
+            case 8:
               return a.expectedAssistsPer90.compareTo(b.expectedAssistsPer90) * (sortAscending ? 1 : -1);
             // Sort by xGI per 90
-            case 5:
+            case 9:
               return a.expectedGoalInvolvementsPer90.compareTo(b.expectedGoalInvolvementsPer90) * (sortAscending ? 1 : -1);
+            // Sort by ICT index
+            case 10:
+              return a.ictIndex.compareTo(b.ictIndex) * (sortAscending ? 1 : -1);
             // Sort by selected by %
-            case 6:
+            case 11:
               return a.selectedByPercent.compareTo(b.selectedByPercent) * (sortAscending ? 1 : -1);
             // Sort by total points
-            case 7:
+            case 12:
               return a.totalPoints.compareTo(b.totalPoints) * (sortAscending ? 1 : -1);
             default:
               return 0;   
@@ -91,12 +106,17 @@ class PlayersDataSource extends DataTableSource {
     return DataRow.byIndex(
       index: index,
       cells: <DataCell>[
+        DataCell(Text(player.position.toString())),
         DataCell(Text("${player.firstName} ${player.lastName}")),
+        DataCell(Text(player.team.toString())),
+        DataCell(Text(player.starts.toString())),
+        DataCell(Text(player.minutes.toString())),
         DataCell(Text(player.goals.toString())),
         DataCell(Text(player.assists.toString())),
         DataCell(Text(player.expectedGoalsPer90.toString())),
         DataCell(Text(player.expectedAssistsPer90.toString())),
         DataCell(Text(player.expectedGoalInvolvementsPer90.toString())),
+        DataCell(Text(player.ictIndex.toString())),
         DataCell(Text(player.selectedByPercent.toString())),
         DataCell(Text(player.totalPoints.toString())),
       ],
@@ -119,7 +139,7 @@ class PlayersTable extends ConsumerStatefulWidget {
 
 class PlayersTableState extends ConsumerState<PlayersTable> {
   // Initially sets UI of total points to be clicked and in descending order
-  int _columnIndex = 7;
+  int _columnIndex = 12;
   bool _columnAscending = false;
 
   late PlayersDataSource dataSource;
@@ -152,7 +172,23 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
       sortAscending: _columnAscending,
       columns: <DataColumn>[
         DataColumn(
+          label: const Text('Position'),
+          onSort: _sort,
+        ),
+        DataColumn(
           label: const Text('Player Name'),
+          onSort: _sort,
+        ),
+        DataColumn(
+          label: const Text('Team'),
+          onSort: _sort,
+        ),
+        DataColumn(
+          label: const Text('Starts'),
+          onSort: _sort,
+        ),
+        DataColumn(
+          label: const Text('Minutes'),
           onSort: _sort,
         ),
         DataColumn(
@@ -173,6 +209,10 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
         ),
         DataColumn(
           label: const Text('xGI per 90'),
+          onSort: _sort,
+        ),
+        DataColumn(
+          label: const Text('ICT index'),
           onSort: _sort,
         ),
         DataColumn(
