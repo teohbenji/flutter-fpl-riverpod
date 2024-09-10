@@ -4,7 +4,7 @@ import 'package:fpl_riverpod/models/player.dart';
 import 'package:fpl_riverpod/providers/players_provider.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -121,18 +121,13 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
   // Initially sets UI of total points to be clicked and in descending order
   int _columnIndex = 7;
   bool _columnAscending = false;
-  
+
   late PlayersDataSource dataSource;
-  late List<Player> playersDataList;
 
   @override
   void initState() {
     super.initState();
     dataSource = PlayersDataSource();
-
-    // Set these two variables only once, don't assign value again during sort/biuld
-    playersDataList = ref.read(playersDataProvider).valueOrNull ?? [];
-    dataSource.setData(playersDataList, _columnIndex, _columnAscending); 
   }
 
   void _sort(int columnIndex, bool ascending) {
@@ -140,12 +135,18 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
       _columnIndex = columnIndex;
       _columnAscending = ascending;
 
+      final playersDataList = ref.read(playersDataProvider).value ?? [];
+
       dataSource.setData(playersDataList, _columnIndex, _columnAscending);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    final playersDataList = ref.watch(playersDataProvider).value ?? [];
+
+    dataSource.setData(playersDataList, _columnIndex, _columnAscending);
+
     return PaginatedDataTable(
       sortColumnIndex: _columnIndex,
       sortAscending: _columnAscending,

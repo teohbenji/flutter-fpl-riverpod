@@ -27,9 +27,9 @@ class Player {
       lastName = json['second_name'].toString(),
       goals = json['goals_scored'],
       assists = json['assists'],
-      expectedGoalsPer90 = double.parse(json['expected_goals']),
-      expectedAssistsPer90 = double.parse(json['expected_assists']),
-      expectedGoalInvolvementsPer90 = double.parse(json['expected_goal_involvements']),
+      expectedGoalsPer90 = json['expected_goals_per_90'],
+      expectedAssistsPer90 = json['expected_assists_per_90'],
+      expectedGoalInvolvementsPer90 = json['expected_goal_involvements_per_90'],
       selectedByPercent = double.parse(json['selected_by_percent']),
       totalPoints = json['total_points'];
 }
