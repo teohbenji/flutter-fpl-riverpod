@@ -10,9 +10,9 @@ class GeneralInfoRepository {
   Future<List<Player>> getAllPlayers() async {
     try {
       final response = await generalInfoAPI.getGeneralInfo();
-      final String message = response['message']; 
+      final String message = response['message'];
       if (message == "Success") {
-        final List<dynamic> data = response["elements"]; 
+        final List<dynamic> data = response["data"]["elements"].take(10).toList(); 
         final List<Player> playersData = 
            data.map((singleData) => Player.fromJson(singleData)).toList();
            

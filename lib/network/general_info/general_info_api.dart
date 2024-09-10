@@ -7,7 +7,7 @@ class GeneralInfoAPI {
 
   Future<Map<String, dynamic>> getGeneralInfo() async {
     final response = await dioService.get(
-      '/api/bootstrap-static',
+      'api/general-info',
     );
     return response.data;
   }
