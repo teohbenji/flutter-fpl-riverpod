@@ -83,11 +83,14 @@ class PlayersDataSource extends DataTableSource {
             // Sort by ICT index
             case 10:
               return a.ictIndex.compareTo(b.ictIndex) * (sortAscending ? 1 : -1);
-            // Sort by selected by %
+            // Sort by ICT index rank
             case 11:
+              return a.ictIndexRank.compareTo(b.ictIndexRank) * (sortAscending ? 1 : -1);
+            // Sort by selected by %
+            case 12:
               return a.selectedByPercent.compareTo(b.selectedByPercent) * (sortAscending ? 1 : -1);
             // Sort by total points
-            case 12:
+            case 13:
               return a.totalPoints.compareTo(b.totalPoints) * (sortAscending ? 1 : -1);
             default:
               return 0;   
@@ -117,6 +120,7 @@ class PlayersDataSource extends DataTableSource {
         DataCell(Text(player.expectedAssistsPer90.toString())),
         DataCell(Text(player.expectedGoalInvolvementsPer90.toString())),
         DataCell(Text(player.ictIndex.toString())),
+        DataCell(Text(player.ictIndexRank.toString())),
         DataCell(Text(player.selectedByPercent.toString())),
         DataCell(Text(player.totalPoints.toString())),
       ],
@@ -139,7 +143,7 @@ class PlayersTable extends ConsumerStatefulWidget {
 
 class PlayersTableState extends ConsumerState<PlayersTable> {
   // Initially sets UI of total points to be clicked and in descending order
-  int _columnIndex = 12;
+  int _columnIndex = 13;
   bool _columnAscending = false;
 
   late PlayersDataSource dataSource;
@@ -213,6 +217,10 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
         ),
         DataColumn(
           label: const Text('ICT index'),
+          onSort: _sort,
+        ),
+        DataColumn(
+          label: const Text('ICT index rank'),
           onSort: _sort,
         ),
         DataColumn(

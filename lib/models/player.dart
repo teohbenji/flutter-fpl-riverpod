@@ -14,6 +14,7 @@ class Player {
   final double expectedAssistsPer90;
   final double expectedGoalInvolvementsPer90;
   final double ictIndex;
+  final int ictIndexRank;
   final double selectedByPercent;
   final int totalPoints;
 
@@ -30,6 +31,7 @@ class Player {
     required this.expectedAssistsPer90,
     required this.expectedGoalInvolvementsPer90,
     required this.ictIndex,
+    required this.ictIndexRank,
     required this.selectedByPercent,
     required this.totalPoints,
   });
@@ -48,6 +50,7 @@ class Player {
       expectedAssistsPer90 = json['expected_assists_per_90'],
       expectedGoalInvolvementsPer90 = json['expected_goal_involvements_per_90'],
       ictIndex = double.parse(json['ict_index']),
+      ictIndexRank = json['ict_index_rank'],
       selectedByPercent = double.parse(json['selected_by_percent']),
       totalPoints = json['total_points'];
 }
