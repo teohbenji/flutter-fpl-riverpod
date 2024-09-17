@@ -58,13 +58,13 @@ class PlayersDataSource extends DataTableSource {
               }
             // Sort by team
             case 3:
-              return a.team.compareTo(b.team) * (sortAscending ? 1 : -1);  
-            // Sort by starts
+              return a.team.compareTo(b.team) * (sortAscending ? 1 : -1);
+            // Sort by price
             case 4:
-              return a.starts.compareTo(b.starts) * (sortAscending ? 1 : -1);
-            // Sort by minutes
+              return double.parse(a.price).compareTo(double.parse(b.price)) * (sortAscending ? 1 : -1);   
+            // Sort by starts
             case 5:
-              return a.minutes.compareTo(b.minutes) * (sortAscending ? 1 : -1);
+              return a.starts.compareTo(b.starts) * (sortAscending ? 1 : -1);
             // Sort by goals
             case 6:
               return a.goals.compareTo(b.goals) * (sortAscending ? 1 : -1);
@@ -111,8 +111,8 @@ class PlayersDataSource extends DataTableSource {
         DataCell(Text(player.position.toString())),
         DataCell(Text("${player.firstName} ${player.lastName}")),
         DataCell(Text(player.team.toString())),
+        DataCell(Text(player.price.toString())),
         DataCell(Text(player.starts.toString())),
-        DataCell(Text(player.minutes.toString())),
         DataCell(Text(player.goals.toString())),
         DataCell(Text(player.assists.toString())),
         DataCell(Text(player.expectedGoalsPer90.toString())),
@@ -141,7 +141,7 @@ class PlayersTable extends ConsumerStatefulWidget {
 
 class PlayersTableState extends ConsumerState<PlayersTable> {
   // Initially sets UI of total points to be clicked and in descending order
-  int _columnIndex = 13;
+  int _columnIndex = 13; 
   bool _columnAscending = false;
 
   late PlayersDataSource dataSource;
@@ -189,11 +189,11 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
           onSort: _sort,
         ),
         DataColumn(
-          label: const Text('Starts'),
+          label: const Text('Price'),
           onSort: _sort,
         ),
         DataColumn(
-          label: const Text('Minutes'),
+          label: const Text('Starts'),
           onSort: _sort,
         ),
         DataColumn(

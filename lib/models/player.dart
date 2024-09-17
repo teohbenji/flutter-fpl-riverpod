@@ -6,6 +6,7 @@ class Player {
   final String team;
   final String firstName;
   final String lastName;
+  final String price;
   final int starts;
   final int minutes;
   final int goals;
@@ -22,6 +23,7 @@ class Player {
     required this.team,
     required this.firstName,
     required this.lastName,
+    required this.price,
     required this.starts,
     required this.minutes,
     required this.goals,
@@ -42,6 +44,7 @@ class Player {
       lastName = json['second_name'].toString(),
       goals = json['goals_scored'],
       assists = json['assists'],
+      price = (json['now_cost'] / 10).toStringAsFixed(1), //Provided price is * 10 of actual
       starts = json['starts'],
       minutes = json['minutes'],
       expectedGoalsPer90 = json['expected_goals_per_90'],
