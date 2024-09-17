@@ -8,14 +8,14 @@ class Player {
   final String lastName;
   final String price;
   final int starts;
-  final int minutes;
   final int goals;
   final int assists;
   final double expectedGoalsPer90;
   final double expectedAssistsPer90;
   final double expectedGoalInvolvementsPer90;
-  final double ictIndex;
-  final double selectedByPercent;
+  final String creativityPer90;
+  final String threatPer90;
+  final String selectedByPercent;
   final int totalPoints;
 
   Player({
@@ -25,13 +25,13 @@ class Player {
     required this.lastName,
     required this.price,
     required this.starts,
-    required this.minutes,
     required this.goals,
     required this.assists,
     required this.expectedGoalsPer90,
     required this.expectedAssistsPer90,
     required this.expectedGoalInvolvementsPer90,
-    required this.ictIndex,
+    required this.creativityPer90,
+    required this.threatPer90,
     required this.selectedByPercent,
     required this.totalPoints,
   });
@@ -39,18 +39,18 @@ class Player {
   // Maps json data to player object
   Player.fromJson(Map<String, dynamic> json)
     : position = getPlayerPosition(json['element_type']),
-      team = getPlayerTeam(json['team']),
       firstName = json['first_name'].toString(), 
       lastName = json['second_name'].toString(),
+      team = getPlayerTeam(json['team']),
       goals = json['goals_scored'],
       assists = json['assists'],
       price = (json['now_cost'] / 10).toStringAsFixed(1), //Provided price is * 10 of actual
       starts = json['starts'],
-      minutes = json['minutes'],
       expectedGoalsPer90 = json['expected_goals_per_90'],
       expectedAssistsPer90 = json['expected_assists_per_90'],
       expectedGoalInvolvementsPer90 = json['expected_goal_involvements_per_90'],
-      ictIndex = double.parse(json['ict_index']),
-      selectedByPercent = double.parse(json['selected_by_percent']),
+      creativityPer90 = (double.parse(json['creativity']) / 90).toStringAsFixed(2),
+      threatPer90 = (double.parse(json['threat']) / 90).toStringAsFixed(2),
+      selectedByPercent = double.parse(json['selected_by_percent']).toStringAsFixed(1),
       totalPoints = json['total_points'];
 }
