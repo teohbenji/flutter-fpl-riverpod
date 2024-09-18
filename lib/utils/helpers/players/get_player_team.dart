@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 String getPlayerTeam(int index) {
     switch (index) {
       case 1:
@@ -11,7 +9,7 @@ String getPlayerTeam(int index) {
       case 4:
         return 'Brentford';
       case 5:
-        return 'Brighton and Hove Albion';
+        return 'Brighton';
       case 6:
         return 'Chelsea';
       case 7:
@@ -41,7 +39,7 @@ String getPlayerTeam(int index) {
       case 19:
         return 'West Ham United';
       case 20:
-        return 'Wolverhampton Wanderers';
+        return 'Wolves';
       default:
         return 'Unknown Team';
     }

@@ -4,8 +4,7 @@ import 'package:fpl_riverpod/utils/helpers/players/get_player_team.dart';
 class Player {
   final String position;
   final String team;
-  final String firstName;
-  final String lastName;
+  final String name;
   final String price;
   final int starts;
   final int goals;
@@ -21,8 +20,7 @@ class Player {
   Player({
     required this.position,
     required this.team,
-    required this.firstName,
-    required this.lastName,
+    required this.name,
     required this.price,
     required this.starts,
     required this.goals,
@@ -39,8 +37,7 @@ class Player {
   // Maps json data to player object
   Player.fromJson(Map<String, dynamic> json)
     : position = getPlayerPosition(json['element_type']),
-      firstName = json['first_name'].toString(), 
-      lastName = json['second_name'].toString(),
+      name = json['web_name'].toString(), 
       team = getPlayerTeam(json['team']),
       goals = json['goals_scored'],
       assists = json['assists'],

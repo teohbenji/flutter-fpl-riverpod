@@ -48,14 +48,9 @@ class PlayersDataSource extends DataTableSource {
             // Sort by position
             case 1:
               return a.position.compareTo(b.position) * (sortAscending ? 1 : -1);
-            // Sort by first name, if same, then sort according to last name
+            // Sort by name
             case 2:
-              int comparator = a.firstName.compareTo(b.firstName) * (sortAscending ? 1 : -1);
-              if(comparator != 0){
-                return comparator;
-              } else {
-                return a.lastName.compareTo(b.lastName) * (sortAscending ? 1 : -1); 
-              }
+              return a.name.compareTo(b.name) * (sortAscending ? 1 : -1);
             // Sort by team
             case 3:
               return a.team.compareTo(b.team) * (sortAscending ? 1 : -1);
@@ -112,7 +107,7 @@ class PlayersDataSource extends DataTableSource {
       cells: <DataCell>[
         DataCell(Text("$rank")),
         DataCell(Text(player.position.toString())),
-        DataCell(Text("${player.firstName} ${player.lastName}")),
+        DataCell(Text(player.name)),
         DataCell(Text(player.team.toString())),
         DataCell(Text(player.price.toString())),
         DataCell(Text(player.starts.toString())),
@@ -174,6 +169,7 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
     dataSource.setData(playersDataList, _columnIndex, _columnAscending);
 
     return PaginatedDataTable(
+      columnSpacing: 28.0,
       sortColumnIndex: _columnIndex,
       sortAscending: _columnAscending,
       columns: <DataColumn>[
@@ -185,7 +181,7 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
           onSort: _sort,
         ),
         DataColumn(
-          label: const Text('Player Name'),
+          label: const Text('Player'),
           onSort: _sort,
         ),
         DataColumn(
@@ -233,7 +229,7 @@ class PlayersTableState extends ConsumerState<PlayersTable> {
           onSort: _sort,
         ),
         DataColumn(
-          label: const Text('Total Points'),
+          label: const Text('Points'),
           onSort: _sort,
         ),
       ],
