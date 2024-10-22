@@ -96,6 +96,7 @@ Branch types:
 - feature (named after Jira ticket) 
 
 [Commit style guide](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13)
+[Changelog](https://keepachangelog.com/en/1.0.0/)
 
 ## Agile
 
